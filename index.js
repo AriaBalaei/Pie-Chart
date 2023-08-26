@@ -11,7 +11,7 @@ const graphHeight = 650 -margin.top - margin.bottom;
 const mainCanvas = svg.append('g')
                 .attr('height', graphHeight /2)
                 .attr('width', graphWidth / 2)
-                .attr('transform',`translate(${margin.left + 160},${margin.top + 310})`);
+                .attr('transform',`translate(${margin.left + 260},${margin.top + 310})`);
 /*
   var tip =d3.tip()
     .attr('class', 'd3-tip')
@@ -42,7 +42,8 @@ const mainCanvas = svg.append('g')
   svg.append('text')
       .attr('class', 'title')
       .attr('dy', '9%')
-      .attr('dx', '22%')
+      .attr('dx', margin.left + 260)
+      .attr('text-anchor', 'middle')
       .attr('opacity', 0)
       .transition()
         .duration(1000)
