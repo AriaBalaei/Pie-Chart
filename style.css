@@ -1,0 +1,9 @@
+.canva {
+  margin: auto;
+  display: block;
+  background: rgb(21, 21, 138);
+}
+
+.title{
+  font-size: 25px;
+}
