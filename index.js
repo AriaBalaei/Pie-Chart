@@ -12,14 +12,7 @@ const mainCanvas = svg.append('g')
                 .attr('height', graphHeight /2)
                 .attr('width', graphWidth / 2)
                 .attr('transform',`translate(${margin.left + 260},${margin.top + 310})`);
-/*
-  var tip =d3.tip()
-    .attr('class', 'd3-tip')
-    .offset([0,-3])
-    .direction('e')
-    .html(function(d){return 'type' + ': <span style="color:orange">' + d.data.type +
-                              +'<p>number: ' + '<span style="color:orangered">' + d.data.number})
- */   
+
  // mainCanvas.call(tip)
  var tooltip = d3.select("body")
     .append("div")
@@ -51,20 +44,24 @@ const mainCanvas = svg.append('g')
 
       .text('Pie Chart')
       .attr('fill', 'white')
+
   //add text
   mainCanvas.append('text')
             .attr('class', 'mytext')
-            .attr('dy', '.85em')
+           // .attr('dy', '.85em')
             .style('opacity', '0.0')
             .transition()
                 .duration(1000)
                 .style('opacity', (d, i) => i+0.7)
             .text('Expance')
             .attr('text-anchor', 'middle')
-            .attr('fill', 'white')
+            .attr("dominant-baseline", "central")
+         //   .attr('fill', 'white')
+            
   //difine ordinal scale
   const colorScale = d3.scaleOrdinal(d3['schemeCategory10'])
 
+  
 function getCSVData() {
   d3.csv('/expence.csv', function(d){
     return d;
@@ -115,10 +112,23 @@ function drawPieChart(data){
               .duration(750)       
               .attrTween('d', arcAnimatio)
 
-       // .on('mouseover', tip.show)
-       // .in('mouseout', tip.hide)
-        
-
+       //label
+       paths.enter()
+            .append('text')
+            .text(function(d) {if(d.endAngle - d.startAngle > (Math.PI/7))
+            return  d.data.type;})
+            .attr('transform', function(d){
+              return 'translate(' + arcPath.centroid(d) + ')';
+            })
+            .attr('dominant-baseline', 'central')
+            .style('text-anchor', 'middle')
+            .style('font-size', 19)
+            .style('fill', function(d) {
+              var bgColor = colorScale(d.data.number)
+              var rgb = d3.rgb(bgColor)
+              var backgroundIsDark = (rgb.r + rgb.g + rgb.b) / 3 < 128
+              return backgroundIsDark ? '#fff' : '#000'})
+            
 
 }
 
