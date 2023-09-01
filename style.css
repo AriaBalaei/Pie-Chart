@@ -1,5 +1,5 @@
 body{
-  margin: 0;
+  margin: 0; 
   padding: 0;
   overflow: hidden;
 }
@@ -12,10 +12,16 @@ body{
 }
 
 .title{
-  font-size: 25px;
+  font-size: 72pt;
 }
 
 .mytext{
-  font-size:x-large;
+  font-size: 32pt;
   fill:aliceblue;
+}
+
+.tooltip{
+  padding: 20px;
+  color: aqua;
+  border-radius: 150px;
 }

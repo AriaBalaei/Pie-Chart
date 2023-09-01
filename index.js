@@ -34,9 +34,9 @@ const mainCanvas = svg.append('g')
   //title
   svg.append('text')
       .attr('class', 'title')
-      .attr('dy', '9%')
       .attr('dx', margin.left + 260)
       .attr('text-anchor', 'middle')
+      .attr('dominant-baseline', 'text-before-edge')
       .attr('opacity', 0)
       .transition()
         .duration(1000)
@@ -93,12 +93,14 @@ function drawPieChart(data){
              .transition()
              .duration(100)//100 ms
              .style('opacity', '0.7')
-          tooltip.html( d => {return '<p>  Type: ' + '<span style="color:orange"></span>' + event.target.__data__.data.type + '</p>' + 
+          tooltip.html( d => {return '<p>Type: ' + '<span style="color:orange"></span>' + event.target.__data__.data.type + '</p>' + 
           '<p>  Price: ' + '<span style="color:orangered"></span>' + event.target.__data__.data.number + '</p>'})
           tooltip.style("visibility", "visible")
-          tooltip.style('opacity', '0.8')
+          tooltip.style('opacity', '0.9')
           tooltip.style('background', 'black')
           tooltip.style('color', 'white')
+          tooltip.attr('class', 'tooltip')
+
         })
         .on("mouseout", function(event){
           d3.select(this)
